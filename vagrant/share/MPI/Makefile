@@ -2,7 +2,7 @@ CC = /usr/lib64/mpich/bin/mpicc
 
 CFLAGS = -I. -g -Wall
 LDFLAGS = -L. -lm
-PROGRAMS = hello potatoes potatoes
+PROGRAMS = hello potato potatoes
 
 default: all
 all: $(PROGRAMS)
