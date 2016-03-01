@@ -41,6 +41,7 @@ If all goes well all four nodes should boot up cleanly.
     node1: SSH address: 127.0.0.1:2222
     node1: SSH username: vagrant
     node1: SSH auth method: private key
+```
 
 * If you are a Mac or Linux user, you can simply type `vagrant ssh node1`
 
