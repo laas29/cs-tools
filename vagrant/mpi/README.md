@@ -105,7 +105,7 @@ Create `hostfile` with the following:
 To run your program execute the following command:
 
 ```
-mpirun -n 4 -f hostfile /share/hello
+mpirun -n 4 -f hostfile /share/MPI/hello
 ```
 
 The `hello.c` program demonstrates a simple MPI program that does not perform any communications.
