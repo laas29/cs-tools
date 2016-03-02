@@ -22,21 +22,27 @@ void printArray(int *N, int size)
 void doBoss()
 {
   MPI_Status status;
-  int worker_id;
+  int i;
 
-  for (worker_id = 1; worker_id < world_size; worker_id++) {
+  for (i = 1; i < world_size; i++) {
     int potatoSize = rand() % 10 + 1;
-    MPI_Send(&potatoSize, 1, MPI_INT, worker_id, 0, MPI_COMM_WORLD);
+    MPI_Send(&potatoSize, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
   }
 
-  for (worker_id = 1; worker_id < world_size; worker_id++) {
+  int count = world_size;
+
+  /* the boss receives from any source */
+  while (count > 1) {
     int potatoSize;
-    MPI_Recv(&potatoSize, 1, MPI_INT, worker_id, 0, MPI_COMM_WORLD, &status);
+    MPI_Recv(&potatoSize, 1, MPI_INT, MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, 
+             &status);
+    int worker_id = status.MPI_SOURCE;
     int *array = (int*)malloc(sizeof(int) * potatoSize);
     MPI_Recv(array, potatoSize, MPI_INT, worker_id, 0, MPI_COMM_WORLD, 
              &status);
     printf("Received from %02d ", worker_id);
     printArray(array, potatoSize);
+    count--;
   }
 }
 
@@ -54,6 +60,9 @@ void doWorker()
      int salt_level = rand() % 1000;
      array[i] = salt_level;
   }
+
+  /* sleep is implemented here to show that workers completion time varies */
+  sleep(rand() % 5);
 
   MPI_Send(&potatoSize, 1, MPI_INT, master_id, 0, MPI_COMM_WORLD);
   MPI_Send(array, potatoSize, MPI_INT, master_id, 0, MPI_COMM_WORLD);
