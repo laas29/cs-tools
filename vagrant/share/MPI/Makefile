@@ -2,7 +2,7 @@ CC = /usr/lib64/mpich/bin/mpicc
 
 CFLAGS = -I. -g -Wall
 LDFLAGS = -L. -lm
-PROGRAMS = hello potato potatoes
+PROGRAMS = hello potato potatoes mashed_potatoes
 
 default: all
 all: $(PROGRAMS)
@@ -19,7 +19,10 @@ potato: potato.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 potatoes: potatoes.o
-		$(CC) -o $@ $^ $(LDFLAGS)
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+mashed_potatoes: mashed_potatoes.o
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 clean:
 	/bin/rm -f *.o $(PROGRAMS)
