@@ -30,7 +30,7 @@ If you look at the `Vagrantfile` you will notice that in the single node mode, w
 
 ### Multiple Nodes Configuration
 
-The network setting for single node mode is:
+The network setting for multiple nodes mode is:
 
 ```
 node1 192.168.33.101
@@ -39,7 +39,7 @@ node3 192.168.33.103
 node4 192.168.33.104
 ```
 
-Start up your first single node:
+Start up your multiple nodes node:
 
 ```
 cd cs-tools/hadoop
